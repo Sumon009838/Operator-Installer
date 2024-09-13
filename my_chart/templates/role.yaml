@@ -1,0 +1,16 @@
+# role-deployment-service.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  namespace: default   # Namespace where the role is effective
+  name: {{ .Values.Role.name }} # Name of the Role
+rules:
+  - apiGroups: ["apps"]
+    resources: ["deployments"]
+    verbs: ["watch","get", "list", "create", "update", "delete"]
+  - apiGroups: [""]
+    resources: ["services"]
+    verbs: ["watch","get", "list", "create", "update", "delete"]
+  - apiGroups: ["reader.com.my.domain"]
+    resources: [ "bookstores" ]
+    verbs: ["watch","get", "list", "create", "update", "delete"]
